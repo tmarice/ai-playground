@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chatbot</title>
+    <style>
+      :root {
+        --bg: #0f0f12;
+        --panel: #16181d;
+        --panel-2: #1d2027;
+        --border: #2a2f3a;
+        --text: #e8eaf0;
+        --muted: #9aa3b2;
+        --accent: #5aa9ff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html, body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+        color: var(--text);
+        background: var(--bg);
+      }
+
+      .app {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        height: 100vh;
+      }
+
+      .sidebar {
+        background: var(--panel);
+        border-right: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .sidebar-header {
+        padding: 16px;
+        font-weight: 600;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .sidebar-section {
+        padding: 12px 16px;
+        color: var(--muted);
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .chat-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        overflow-y: auto;
+        flex: 1;
+      }
+
+      .chat-item {
+        padding: 10px 16px;
+        border-bottom: 1px solid var(--border);
+        cursor: pointer;
+      }
+
+      .chat-item:hover {
+        background: var(--panel-2);
+      }
+
+      .main {
+        display: grid;
+        grid-template-rows: 1fr auto;
+        height: 100vh;
+      }
+
+      .messages {
+        padding: 24px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .message {
+        max-width: 720px;
+        padding: 14px 16px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--panel);
+        line-height: 1.45;
+      }
+
+      .message.user {
+        align-self: flex-end;
+        background: #1a2433;
+        border-color: #243247;
+      }
+
+      .composer {
+        border-top: 1px solid var(--border);
+        padding: 16px 24px 20px;
+        background: var(--panel);
+      }
+
+      .composer-inner {
+        display: flex;
+        gap: 12px;
+        align-items: flex-end;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .composer-left {
+        flex: 1;
+      }
+
+      .provider-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 12px;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+
+      .provider-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        color: var(--muted);
+        background: var(--panel-2);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 6px 10px;
+      }
+
+      .provider-item input {
+        accent-color: var(--accent);
+      }
+
+      .composer textarea {
+        flex: 1;
+        min-height: 48px;
+        max-height: 160px;
+        resize: vertical;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        background: var(--panel-2);
+        color: var(--text);
+        padding: 12px 14px;
+        font-size: 14px;
+      }
+
+      .composer button {
+        padding: 12px 18px;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        background: var(--accent);
+        color: #0b0d12;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .composer button:hover {
+        filter: brightness(1.05);
+      }
+
+      .footer-hint {
+        text-align: center;
+        color: var(--muted);
+        font-size: 12px;
+        margin-top: 8px;
+      }
+
+      @media (max-width: 900px) {
+        .app {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+          display: none;
+        }
+
+        .messages {
+          padding: 16px;
+        }
+
+        .composer {
+          padding: 12px 16px 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="sidebar-header">Chatbot</div>
+        <div class="sidebar-section">Recent</div>
+        <ul class="chat-list">
+          <li class="chat-item">Project kickoff notes</li>
+          <li class="chat-item">API debugging session</li>
+          <li class="chat-item">Marketing copy drafts</li>
+          <li class="chat-item">Support escalation</li>
+          <li class="chat-item">UI polish checklist</li>
+        </ul>
+      </aside>
+
+      <main class="main">
+        <section class="messages">
+          <div class="message">Welcome back! How can I help today?</div>
+          <div class="message user">Draft a quick status update for the team.</div>
+          <div class="message">Sure — I can do that. What project and key highlights should I include?</div>
+        </section>
+
+        <section class="composer">
+          <div class="composer-inner">
+            <div class="composer-left">
+              <div class="provider-list">
+                {% for provider in available_providers %}
+                  <label class="provider-item">
+                    <input type="checkbox" name="provider" value="{{ provider }}">
+                    <span>{{ provider }}</span>
+                  </label>
+                {% endfor %}
+              </div>
+              <textarea placeholder="Message Chatbot..."></textarea>
+            </div>
+            <button type="button">Send</button>
+          </div>
+          <div class="footer-hint">Shift + Enter to add a new line</div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
