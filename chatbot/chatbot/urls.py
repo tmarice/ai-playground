@@ -18,8 +18,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from accounts import views as accounts_views
+from chatbot import views as root_views
+
 urlpatterns = [
+    path("", root_views.root_landing, name="root"),
     path("admin/", admin.site.urls),
+    path("login/", accounts_views.LoginView.as_view(), name="login"),
     path("accounts/", include("accounts.urls")),
     path("chat/", include("chat.urls")),
 ]

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2026 Generative AI Engineering Roadmap</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #121933;
+      --panel-2: #182142;
+      --text: #e8ecf8;
+      --muted: #afbbd9;
+      --accent: #7cc4ff;
+      --accent-2: #9bffcf;
+      --border: #2a3768;
+      --shadow: 0 10px 30px rgba(0,0,0,.25);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(180deg, #0a0f1f 0%, #0d1430 100%);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 32px 20px 72px;
+    }
+    .hero {
+      background: linear-gradient(135deg, rgba(124,196,255,.12), rgba(155,255,207,.08));
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(2rem, 3vw, 3rem);
+      line-height: 1.1;
+    }
+    .subtitle {
+      color: var(--muted);
+      max-width: 980px;
+      margin: 0;
+      font-size: 1rem;
+    }
+    .toc {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin: 18px 0 0;
+    }
+    .toc a {
+      display: block;
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      border-radius: 12px;
+      color: var(--text);
+    }
+    .section {
+      margin-top: 26px;
+      background: rgba(255,255,255,.02);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .section-header {
+      padding: 18px 20px;
+      background: linear-gradient(135deg, rgba(124,196,255,.10), rgba(155,255,207,.06));
+      border-bottom: 1px solid var(--border);
+    }
+    .section-header h2 {
+      margin: 0;
+      font-size: 1.35rem;
+    }
+    .section-header p {
+      margin: 6px 0 0;
+      color: var(--muted);
+    }
+    .table-wrap {
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1100px;
+      background: var(--panel);
+    }
+    th, td {
+      padding: 14px 14px;
+      border: 1px solid var(--border);
+      vertical-align: top;
+      text-align: left;
+    }
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background: var(--panel-2);
+      color: #fff;
+      font-weight: 700;
+    }
+    td { color: var(--text); }
+    td small, .muted { color: var(--muted); }
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: .78rem;
+      font-weight: 700;
+      border: 1px solid var(--border);
+      background: rgba(124,196,255,.10);
+      color: var(--accent);
+      white-space: nowrap;
+    }
+    .yes { color: var(--accent-2); background: rgba(155,255,207,.08); }
+    .foot {
+      color: var(--muted);
+      margin-top: 18px;
+      font-size: .95rem;
+    }
+    ul.link-list {
+      margin: 0;
+      padding-left: 18px;
+    }
+    ul.link-list li { margin: 0 0 6px; }
+    @media (max-width: 900px) {
+      .wrap { padding: 20px 12px 48px; }
+      .hero { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>2026 Generative AI Engineering Roadmap</h1>
+      <p class="subtitle">Styled as a single-page reference for a strong Python + Django engineer. It includes a learning roadmap, a portfolio-oriented project ranking, and the same project list reordered from easier to harder.</p>
+      <div class="toc">
+        <a href="#roadmap">Learning Roadmap</a>
+        <a href="#portfolio-projects">Portfolio-First Project Ranking</a>
+        <a href="#difficulty-projects">Projects Ranked by Difficulty</a>
+      </div>
+    </section>
+
+    <section id="roadmap" class="section">
+      <div class="section-header">
+        <h2>Learning Roadmap</h2>
+        <p>Phased progression from core API fluency to production platforming and polished capstone work.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Phase</th>
+              <th>What to Learn</th>
+              <th>Why It Matters in 2026</th>
+              <th>Concrete Deliverable</th>
+              <th>Primary Resources</th>
+              <th>Hands-On Tutorials &amp; Guides</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1. Core API Patterns</strong></td>
+              <td>Responses API, reasoning models, streaming, function/tool calling, structured outputs</td>
+              <td>Modern GenAI apps increasingly depend on reliable tool use and machine-readable outputs rather than free-form prompting alone.</td>
+              <td>Build a Django endpoint that returns validated JSON from an LLM and can call internal tools.</td>
+              <td><ul class="link-list"><li><a href="https://developers.openai.com/api/reference/responses">OpenAI Responses API</a></li><li><a href="https://developers.openai.com/api/docs/guides/reasoning">OpenAI Reasoning Guide</a></li><li><a href="https://developers.openai.com/api/docs/guides/function-calling">OpenAI Function Calling</a></li><li><a href="https://developers.openai.com/api/docs/guides/structured-outputs">OpenAI Structured Outputs</a></li><li><a href="https://developers.openai.com/api/docs/guides/conversation-state">OpenAI Conversation State</a></li></ul></td>
+              <td><ul class="link-list"><li><a href="https://developers.openai.com/api/reference/responses">Responses API Overview</a></li><li><a href="https://developers.openai.com/api/docs/guides/function-calling">Function Calling Guide</a></li><li><a href="https://developers.openai.com/api/docs/guides/structured-outputs">Structured Outputs Guide</a></li><li><a href="https://developers.openai.com/api/docs/guides/conversation-state">Conversation State Guide</a></li></ul></td>
+            </tr>
+            <tr>
+              <td><strong>2. Retrieval Systems</strong></td>
+              <td>Chunking, embeddings, hybrid search, reranking, citations, ingestion pipelines</td>
+              <td>RAG remains the default way to connect models to proprietary knowledge, but quality depends on retrieval design and evaluation, not on vector search alone.</td>
+              <td>Ship a document Q&amp;A API backed by pgvector or Qdrant with source citations.</td>
+              <td><ul class="link-list"><li><a href="https://docs.llamaindex.ai/en/stable/">LlamaIndex Docs</a></li><li><a href="https://qdrant.tech/documentation/">Qdrant Docs</a></li><li><a href="https://github.com/pgvector/pgvector">pgvector</a></li><li><a href="https://developers.openai.com/api/docs/guides/embeddings">OpenAI Embeddings</a></li><li><a href="https://docs.langchain.com/langsmith/observability-quickstart">LangSmith Observability</a></li></ul></td>
+              <td><ul class="link-list"><li><a href="https://qdrant.tech/documentation/quickstart/">Qdrant Quickstart</a></li><li><a href="https://qdrant.tech/documentation/tutorials-basics/search-beginners/">Qdrant Semantic Search 101</a></li><li><a href="https://qdrant.tech/documentation/tutorials-search-engineering/hybrid-search-fastembed/">Hybrid Search with FastEmbed</a></li><li><a href="https://qdrant.tech/documentation/tutorials-search-engineering/reranking-hybrid-search/">Hybrid Search with Reranking</a></li><li><a href="https://docs.langchain.com/langsmith/observability-quickstart">LangSmith RAG Tracing Quickstart</a></li></ul></td>
+            </tr>
+            <tr>
+              <td><strong>3. Evaluation Discipline</strong></td>
+              <td>Offline evals, continuous evals, regression suites, trace grading, dataset curation</td>
+              <td>Teams now expect reproducibility and measurable quality; “it seems to work” is no longer sufficient.</td>
+              <td>Create an eval harness for your RAG or agent project and run it in CI.</td>
+              <td><ul class="link-list"><li><a href="https://developers.openai.com/api/docs/guides/evals">OpenAI Evals</a></li><li><a href="https://docs.langchain.com/langsmith/evaluation">LangSmith Evaluation</a></li><li><a href="https://docs.langchain.com/langsmith/evaluation-concepts">LangSmith Evaluation Concepts</a></li><li><a href="https://www.promptfoo.dev/">Promptfoo</a></li></ul></td>
+              <td><ul class="link-list"><li><a href="https://developers.openai.com/api/docs/guides/evals">OpenAI Evals Guide</a></li><li><a href="https://docs.langchain.com/langsmith/evaluation">LangSmith Evaluation Quickstart</a></li><li><a href="https://docs.langchain.com/langsmith/evaluate-graph">Evaluate a Graph</a></li><li><a href="https://www.promptfoo.dev/">Promptfoo Docs</a></li></ul></td>
+            </tr>
+            <tr>
+              <td><strong>4. MCP and Tool Interfaces</strong></td>
+              <td>MCP server design, tool schemas, resources, prompts, auth, local vs remote servers, debugging with Inspector</td>
+              <td>MCP is increasingly used as a standard interface for connecting models to external systems and reusable tool layers.</td>
+              <td>Ship a Python MCP server exposing search, retrieval, and one transactional internal tool, with tests and observability.</td>
+              <td><ul class="link-list"><li><a href="https://modelcontextprotocol.io/docs/learn/architecture">MCP Architecture Overview</a></li><li><a href="https://modelcontextprotocol.io/docs/sdk">MCP SDKs</a></li><li><a href="https://modelcontextprotocol.io/docs/tools/inspector">MCP Inspector</a></li><li><a href="https://developers.openai.com/api/docs/guides/tools">OpenAI Tools</a></li><li><a href="https://developers.openai.com/api/docs/guides/tools-connectors-mcp">OpenAI MCP and Connectors</a></li></ul></td>
+              <td><ul class="link-list"><li><a href="https://modelcontextprotocol.io/docs/develop/build-server">Build an MCP Server</a></li><li><a href="https://modelcontextprotocol.io/docs/develop/build-client">Build an MCP Client</a></li><li><a href="https://modelcontextprotocol.io/docs/tutorials/security/authorization">MCP Authorization Guide</a></li><li><a href="https://modelcontextprotocol.io/tutorials/building-mcp-with-llms">Building MCP with LLMs</a></li><li><a href="https://developers.openai.com/cookbook/examples/mcp/mcp_tool_guide/">OpenAI MCP Tool Guide</a></li></ul></td>
+            </tr>
+            <tr>
+              <td><strong>5. Agentic Workflows</strong></td>
+              <td>State machines, planners, retry logic, human-in-the-loop, tool routing, failure handling</td>
+              <td>Production agents are trending away from “fully autonomous magic” toward explicit workflow graphs with observability and control.</td>
+              <td>Implement a multi-step research or operations assistant with explicit graph transitions.</td>
+              <td><ul class="link-list"><li><a href="https://www.langchain.com/langgraph">LangGraph</a></li><li><a href="https://dspy.ai/">DSPy</a></li><li><a href="https://docs.langchain.com/langsmith/home">LangSmith</a></li><li><a href="https://modelcontextprotocol.io/">Model Context Protocol</a></li></ul></td>
+              <td><ul class="link-list"><li><a href="https://docs.langchain.com/oss/python/langgraph/quickstart">LangGraph Quickstart</a></li><li><a href="https://docs.langchain.com/langsmith/observability-quickstart">LangSmith Observability Quickstart</a></li><li><a href="https://docs.langchain.com/langsmith/evaluate-graph">LangSmith Graph Evaluation Guide</a></li><li><a href="https://dspy.ai/tutorials/">DSPy Tutorials</a></li><li><a href="https://dspy.ai/tutorials/build_ai_program/">Build AI Programs with DSPy</a></li></ul></td>
+            </tr>
+            <tr>
+              <td><strong>6. Multimodal AI</strong></td>
+              <td>Document parsing, image-text embeddings, OCR boundaries, vision models, cross-modal retrieval</td>
+              <td>Many real workflows now combine PDFs, screenshots, tables, images, and text retrieval.</td>
+              <td>Build a search system that can answer over PDFs and images with previews.</td>
+              <td><ul class="link-list"><li><a href="https://pymupdf.readthedocs.io/en/latest/tutorial.html">PyMuPDF Tutorial</a></li><li><a href="https://pymupdf.readthedocs.io/en/latest/recipes.html">PyMuPDF Recipes</a></li><li><a href="https://huggingface.co/docs/transformers/model_doc/clip">CLIP in Transformers</a></li><li><a href="https://www.sbert.net/README.html">Sentence Transformers</a></li><li><a href="https://docs.unstructured.io/open-source/introduction/overview">Unstructured Overview</a></li></ul></td>
+              <td><ul class="link-list"><li><a href="https://pymupdf.readthedocs.io/en/latest/recipes-text.html">PyMuPDF Text Extraction Recipes</a></li><li><a href="https://docs.unstructured.io/examplecode/codesamples/apioss/table-extraction-from-pdf">Unstructured Table Extraction</a></li><li><a href="https://unstructured.io/blog/how-to-process-pdf-in-python">Process PDFs in Python</a></li><li><a href="https://www.sbert.net/examples/sentence_transformer/applications/semantic-search/README.html">Sentence Transformers Semantic Search</a></li><li><a href="https://www.sbert.net/examples/sentence_transformer/README.html">Sentence Transformers Examples</a></li></ul></td>
+            </tr>
+            <tr>
+              <td><strong>7. Open-Weight Model Ops</strong></td>
+              <td>Transformers, PEFT/LoRA/QLoRA, TRL, vLLM, local deployment tradeoffs</td>
+              <td>Even if you use hosted APIs, employers increasingly value engineers who understand open-weight adaptation and serving.</td>
+              <td>Fine-tune a small domain model and serve it behind an internal API.</td>
+              <td><ul class="link-list"><li><a href="https://huggingface.co/docs/transformers/en/index">Transformers</a></li><li><a href="https://huggingface.co/docs/peft/index">PEFT</a></li><li><a href="https://huggingface.co/docs/trl/en/index">TRL</a></li><li><a href="https://docs.vllm.ai/en/latest/getting_started/quickstart/">vLLM</a></li></ul></td>
+              <td><ul class="link-list"><li><a href="https://huggingface.co/docs/peft/quicktour">PEFT Quicktour</a></li><li><a href="https://huggingface.co/docs/trl/en/quickstart">TRL Quickstart</a></li><li><a href="https://huggingface.co/docs/trl/sft_trainer">TRL SFT Trainer</a></li><li><a href="https://docs.vllm.ai/en/latest/getting_started/quickstart/">vLLM Quickstart</a></li><li><a href="https://docs.vllm.ai/en/latest/serving/openai_compatible_server/">vLLM OpenAI-Compatible Server</a></li></ul></td>
+            </tr>
+            <tr>
+              <td><strong>8. Production Platforming</strong></td>
+              <td>Async ingestion, queues, caching, tracing, latency/cost metrics, auth, rate limits</td>
+              <td>Most AI systems fail operationally before they fail intellectually.</td>
+              <td>Wrap one of your projects in Django, Celery, Redis, Postgres, and tracing.</td>
+              <td><ul class="link-list"><li><a href="https://docs.celeryq.dev/en/stable/django/first-steps-with-django.html">Celery + Django</a></li><li><a href="https://django-celery-results.readthedocs.io/en/latest/getting_started.html">django-celery-results</a></li><li><a href="https://docs.langchain.com/langsmith/home">LangSmith</a></li><li><a href="https://github.com/pgvector/pgvector">pgvector</a></li></ul></td>
+              <td><ul class="link-list"><li><a href="https://docs.celeryq.dev/en/stable/django/first-steps-with-django.html">Celery Django First Steps</a></li><li><a href="https://docs.langchain.com/langsmith/observability-quickstart">LangSmith Observability Quickstart</a></li><li><a href="https://qdrant.tech/documentation/cloud-quickstart/">Qdrant Cloud Quickstart</a></li><li><a href="https://qdrant.tech/documentation/quickstart/">Qdrant Local Quickstart</a></li></ul></td>
+            </tr>
+            <tr>
+              <td><strong>9. Capstone Portfolio</strong></td>
+              <td>End-to-end product thinking, DX, reliability, demos, metrics, documentation</td>
+              <td>The winning portfolio artifact is a usable system with a clear architecture, not a notebook.</td>
+              <td>Publish 2–3 polished projects with diagrams, evals, deployment notes, and a live demo.</td>
+              <td><ul class="link-list"><li><a href="https://developers.openai.com/api/docs/guides/evals">OpenAI Evals</a></li><li><a href="https://docs.langchain.com/langsmith/home">LangSmith</a></li><li><a href="https://www.langchain.com/langgraph">LangGraph</a></li><li><a href="https://modelcontextprotocol.io/">Model Context Protocol</a></li></ul></td>
+              <td><ul class="link-list"><li><a href="https://docs.langchain.com/langsmith/observability-quickstart">LangSmith Observability Quickstart</a></li><li><a href="https://docs.langchain.com/langsmith/evaluation">LangSmith Evaluation Quickstart</a></li><li><a href="https://docs.langchain.com/oss/python/langgraph/quickstart">LangGraph Quickstart</a></li><li><a href="https://modelcontextprotocol.io/docs/develop/build-server">MCP Server Tutorial</a></li></ul></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="portfolio-projects" class="section">
+      <div class="section-header">
+        <h2>Portfolio-First Project Ranking</h2>
+        <p>Ordered to maximize signal for AI engineering roles. The top 3 are the strongest standout portfolio pieces.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Rank</th><th>Project</th><th>Portfolio Level?</th><th>Why It Stands Out</th><th>Suggested Django-Flavored Scope</th><th>Key Skills</th><th>Core Resources</th><th>Hands-On Tutorials &amp; Guides</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td><strong>Autonomous Research Agent</strong></td><td><span class="badge yes">Yes</span></td><td>Shows tool use, planning, citations, evals, observability, and product judgment in one project.</td><td>Django app with user queries, tool-backed web/document retrieval, report generation, citations, traces, and eval dashboards.</td><td>Agents, tool calling, workflow graphs, evals, tracing</td><td><ul class="link-list"><li><a href="https://www.langchain.com/langgraph">LangGraph</a></li><li><a href="https://developers.openai.com/api/docs/guides/function-calling">OpenAI Function Calling</a></li><li><a href="https://developers.openai.com/api/docs/guides/evals">OpenAI Evals</a></li><li><a href="https://docs.langchain.com/langsmith/home">LangSmith</a></li><li><a href="https://modelcontextprotocol.io/">Model Context Protocol</a></li></ul></td><td><ul class="link-list"><li><a href="https://docs.langchain.com/oss/python/langgraph/quickstart">LangGraph Quickstart</a></li><li><a href="https://docs.langchain.com/langsmith/observability-quickstart">LangSmith Observability Quickstart</a></li><li><a href="https://docs.langchain.com/langsmith/evaluate-graph">LangSmith Graph Evaluation Guide</a></li><li><a href="https://dspy.ai/tutorials/build_ai_program/">DSPy Agent / AI Program Tutorials</a></li></ul></td></tr>
+            <tr><td>2</td><td><strong>Production-Grade RAG API</strong></td><td><span class="badge yes">Yes</span></td><td>Still the most marketable baseline GenAI system if it includes ingestion, hybrid retrieval, citations, and evaluation.</td><td>Django REST API with file ingestion, embeddings, vector store, hybrid search, reranking, citations, and continuous evals.</td><td>RAG, embeddings, ingestion, retrieval quality, backend architecture</td><td><ul class="link-list"><li><a href="https://docs.llamaindex.ai/en/stable/">LlamaIndex Docs</a></li><li><a href="https://qdrant.tech/documentation/">Qdrant Docs</a></li><li><a href="https://github.com/pgvector/pgvector">pgvector</a></li><li><a href="https://developers.openai.com/api/docs/guides/embeddings">OpenAI Embeddings</a></li><li><a href="https://developers.openai.com/api/docs/guides/evals">OpenAI Evals</a></li></ul></td><td><ul class="link-list"><li><a href="https://qdrant.tech/documentation/quickstart/">Qdrant Quickstart</a></li><li><a href="https://qdrant.tech/documentation/tutorials-basics/search-beginners/">Semantic Search 101</a></li><li><a href="https://qdrant.tech/documentation/tutorials-search-engineering/hybrid-search-fastembed/">Hybrid Search with FastEmbed</a></li><li><a href="https://qdrant.tech/documentation/tutorials-search-engineering/reranking-hybrid-search/">Hybrid Search with Reranking</a></li><li><a href="https://docs.langchain.com/langsmith/observability-quickstart">LangSmith RAG Tracing Quickstart</a></li></ul></td></tr>
+            <tr><td>3</td><td><strong>MCP Server for Private Knowledge + Tools</strong></td><td><span class="badge yes">Yes</span></td><td>Strong portfolio signal because it shows standards-based AI integration work: exposing tools/resources cleanly, handling auth, and making internal systems usable by LLM clients.</td><td>Build a Python MCP server that exposes internal docs, semantic search, ticket lookup, release notes search, and policy retrieval. Add auth, logging, tests, and an eval suite.</td><td>MCP, tool design, schema design, auth, observability, AI platform integration</td><td><ul class="link-list"><li><a href="https://modelcontextprotocol.io/docs/learn/architecture">MCP Architecture</a></li><li><a href="https://modelcontextprotocol.io/docs/sdk">MCP SDKs</a></li><li><a href="https://modelcontextprotocol.io/docs/tools/inspector">MCP Inspector</a></li><li><a href="https://developers.openai.com/api/docs/guides/tools">OpenAI Tools</a></li><li><a href="https://developers.openai.com/api/docs/guides/tools-connectors-mcp">OpenAI MCP and Connectors</a></li></ul></td><td><ul class="link-list"><li><a href="https://modelcontextprotocol.io/docs/develop/build-server">Build an MCP Server</a></li><li><a href="https://modelcontextprotocol.io/docs/develop/build-client">Build an MCP Client</a></li><li><a href="https://modelcontextprotocol.io/docs/tutorials/security/authorization">Authorization in MCP</a></li><li><a href="https://modelcontextprotocol.io/tutorials/building-mcp-with-llms">Building MCP with LLMs</a></li><li><a href="https://developers.openai.com/cookbook/examples/mcp/mcp_tool_guide/">OpenAI MCP Tool Guide</a></li></ul></td></tr>
+            <tr><td>4</td><td><strong>AI Code Review Assistant</strong></td><td><span class="badge yes">Yes</span></td><td>Strong hiring signal because it integrates with real developer workflows and forces repository-aware reasoning.</td><td>GitHub App + Django webhook receiver that reviews PR diffs, posts comments, and tracks false positives via evals.</td><td>Code intelligence, GitHub integration, tool use, structured outputs</td><td><ul class="link-list"><li><a href="https://docs.github.com/en/webhooks/webhook-events-and-payloads">GitHub Webhooks</a></li><li><a href="https://docs.github.com/en/rest/pulls/comments">GitHub PR Review Comments API</a></li><li><a href="https://developers.openai.com/api/docs/guides/structured-outputs">OpenAI Structured Outputs</a></li><li><a href="https://developers.openai.com/api/docs/guides/evals">OpenAI Evals</a></li><li><a href="https://docs.langchain.com/langsmith/home">LangSmith</a></li></ul></td><td><ul class="link-list"><li><a href="https://docs.github.com/enterprise-cloud@latest/apps/creating-github-apps/writing-code-for-a-github-app/quickstart">GitHub App Quickstart</a></li><li><a href="https://docs.github.com/en/enterprise-server%403.20/apps/creating-github-apps/writing-code-for-a-github-app/building-a-github-app-that-responds-to-webhook-events">Build a GitHub App that Responds to Webhooks</a></li><li><a href="https://developers.openai.com/api/docs/guides/structured-outputs">Structured Outputs Guide</a></li><li><a href="https://docs.langchain.com/langsmith/evaluation">LangSmith Evaluation Quickstart</a></li></ul></td></tr>
+            <tr><td>5</td><td><strong>AI Document Analysis Platform</strong></td><td><span class="badge">No</span></td><td>Very practical for enterprise use cases; combines extraction, structuring, and summarization.</td><td>Upload PDFs, parse sections/tables, extract structured JSON, compare versions, and answer questions over documents.</td><td>Document AI, parsing, structured extraction, RAG</td><td><ul class="link-list"><li><a href="https://pymupdf.readthedocs.io/en/latest/tutorial.html">PyMuPDF</a></li><li><a href="https://docs.unstructured.io/open-source/introduction/overview">Unstructured</a></li><li><a href="https://developers.openai.com/api/docs/guides/structured-outputs">OpenAI Structured Outputs</a></li><li><a href="https://docs.llamaindex.ai/en/stable/">LlamaIndex</a></li></ul></td><td><ul class="link-list"><li><a href="https://pymupdf.readthedocs.io/en/latest/recipes-text.html">PyMuPDF Text Recipes</a></li><li><a href="https://pymupdf.readthedocs.io/en/latest/recipes.html">PyMuPDF How-To Guides</a></li><li><a href="https://docs.unstructured.io/examplecode/codesamples/apioss/table-extraction-from-pdf">Unstructured Table Extraction</a></li><li><a href="https://unstructured.io/blog/how-to-process-pdf-in-python">Process PDFs in Python</a></li></ul></td></tr>
+            <tr><td>6</td><td><strong>LLM Evaluation Framework</strong></td><td><span class="badge">No</span></td><td>Less flashy, but extremely valuable; it demonstrates engineering maturity and reliability thinking.</td><td>Internal Django dashboard to benchmark prompts/models, run regression tests, and inspect failures.</td><td>Evals, grading, datasets, CI</td><td><ul class="link-list"><li><a href="https://developers.openai.com/api/docs/guides/evals">OpenAI Evals</a></li><li><a href="https://docs.langchain.com/langsmith/evaluation">LangSmith Evaluation</a></li><li><a href="https://docs.langchain.com/langsmith/evaluation-concepts">LangSmith Evaluation Concepts</a></li><li><a href="https://dspy.ai/">DSPy</a></li><li><a href="https://www.promptfoo.dev/">Promptfoo</a></li></ul></td><td><ul class="link-list"><li><a href="https://developers.openai.com/api/docs/guides/evals">OpenAI Evals Guide</a></li><li><a href="https://docs.langchain.com/langsmith/evaluation">LangSmith Evaluation Quickstart</a></li><li><a href="https://docs.langchain.com/langsmith/evaluate-graph">Evaluate a Graph</a></li><li><a href="https://dspy.ai/tutorials/">DSPy Tutorials</a></li></ul></td></tr>
+            <tr><td>7</td><td><strong>AI Workflow Automation (Agentic)</strong></td><td><span class="badge">No</span></td><td>Good way to learn graph-based orchestration, tool routing, retries, and approval checkpoints.</td><td>Create a business process copilot that plans tasks, calls tools, requests approval, and logs traces.</td><td>Workflow graphs, orchestration, human-in-the-loop</td><td><ul class="link-list"><li><a href="https://www.langchain.com/langgraph">LangGraph</a></li><li><a href="https://dspy.ai/">DSPy</a></li><li><a href="https://docs.langchain.com/langsmith/home">LangSmith</a></li><li><a href="https://modelcontextprotocol.io/">Model Context Protocol</a></li></ul></td><td><ul class="link-list"><li><a href="https://docs.langchain.com/oss/python/langgraph/quickstart">LangGraph Quickstart</a></li><li><a href="https://docs.langchain.com/langsmith/observability-quickstart">LangSmith Observability Quickstart</a></li><li><a href="https://dspy.ai/tutorials/build_ai_program/">Build AI Programs with DSPy</a></li><li><a href="https://dspy.ai/tutorials/deployment/">Deploying DSPy Programs</a></li></ul></td></tr>
+            <tr><td>8</td><td><strong>Multimodal Search Engine</strong></td><td><span class="badge">No</span></td><td>Useful for learning image-text embeddings and non-text retrieval patterns.</td><td>Search documents and images by either natural language or uploaded image, with preview and ranking.</td><td>Multimodal embeddings, vector search, retrieval UX</td><td><ul class="link-list"><li><a href="https://huggingface.co/docs/transformers/model_doc/clip">CLIP</a></li><li><a href="https://www.sbert.net/README.html">Sentence Transformers</a></li><li><a href="https://huggingface.co/docs/transformers/en/index">Transformers</a></li><li><a href="https://qdrant.tech/documentation/">Qdrant</a></li></ul></td><td><ul class="link-list"><li><a href="https://www.sbert.net/examples/sentence_transformer/applications/semantic-search/README.html">Sentence Transformers Semantic Search</a></li><li><a href="https://www.sbert.net/examples/sentence_transformer/README.html">Sentence Transformers Examples</a></li><li><a href="https://qdrant.tech/documentation/tutorials-search-engineering/hybrid-search-fastembed/">Qdrant Hybrid Search</a></li><li><a href="https://huggingface.co/docs/transformers/model_doc/clip">CLIP Usage Guide</a></li></ul></td></tr>
+            <tr><td>9</td><td><strong>Conversational Memory Chatbot</strong></td><td><span class="badge">No</span></td><td>Foundational, but common; it is most useful as an early stepping stone rather than a flagship portfolio piece.</td><td>Chat UI, short-term context window management, long-term vector memory, and conversation summaries.</td><td>Conversation state, memory, summarization, sessions</td><td><ul class="link-list"><li><a href="https://developers.openai.com/api/reference/responses">OpenAI Responses API</a></li><li><a href="https://developers.openai.com/api/docs/guides/conversation-state">Conversation State</a></li><li><a href="https://github.com/pgvector/pgvector">pgvector</a></li><li><a href="https://docs.celeryq.dev/en/stable/django/first-steps-with-django.html">Celery + Django</a></li></ul></td><td><ul class="link-list"><li><a href="https://developers.openai.com/api/reference/responses">Responses API Overview</a></li><li><a href="https://developers.openai.com/api/docs/guides/conversation-state">Conversation State Guide</a></li><li><a href="https://docs.langchain.com/langsmith/observability-quickstart">Tracing Quickstart</a></li><li><a href="https://qdrant.tech/documentation/tutorials-basics/search-beginners/">Semantic Search 101</a></li></ul></td></tr>
+            <tr><td>10</td><td><strong>AI Knowledge Base (Semantic Wiki)</strong></td><td><span class="badge">No</span></td><td>Good for learning embeddings, clustering, auto-tagging, and semantic linking.</td><td>Wiki pages with embeddings, auto-links, summaries, topic clusters, and Q&amp;A over the knowledge graph.</td><td>Knowledge organization, embeddings, retrieval, summarization</td><td><ul class="link-list"><li><a href="https://docs.llamaindex.ai/en/stable/">LlamaIndex</a></li><li><a href="https://github.com/pgvector/pgvector">pgvector</a></li><li><a href="https://qdrant.tech/documentation/">Qdrant</a></li><li><a href="https://networkx.org/documentation/stable/">NetworkX</a></li></ul></td><td><ul class="link-list"><li><a href="https://qdrant.tech/documentation/tutorials-basics/search-beginners/">Semantic Search 101</a></li><li><a href="https://www.sbert.net/examples/sentence_transformer/applications/semantic-search/README.html">Semantic Search with Sentence Transformers</a></li><li><a href="https://qdrant.tech/documentation/tutorials-search-engineering/hybrid-search-fastembed/">Hybrid Search Tutorial</a></li><li><a href="https://docs.langchain.com/langsmith/observability-quickstart">RAG Tracing Quickstart</a></li></ul></td></tr>
+            <tr><td>11</td><td><strong>Fine-Tuning Pipeline</strong></td><td><span class="badge">No</span></td><td>Important to understand, but for many roles it is less differentiating than strong retrieval/agent/eval systems unless you have a meaningful dataset.</td><td>Collect task data, run SFT or adapter fine-tuning, evaluate, and deploy behind a Django service.</td><td>Open-weight training, LoRA/QLoRA, inference serving</td><td><ul class="link-list"><li><a href="https://huggingface.co/docs/transformers/en/index">Transformers</a></li><li><a href="https://huggingface.co/docs/peft/index">PEFT</a></li><li><a href="https://huggingface.co/docs/trl/en/index">TRL</a></li><li><a href="https://docs.vllm.ai/en/latest/getting_started/quickstart/">vLLM</a></li></ul></td><td><ul class="link-list"><li><a href="https://huggingface.co/docs/peft/quicktour">PEFT Quicktour</a></li><li><a href="https://huggingface.co/docs/trl/en/quickstart">TRL Quickstart</a></li><li><a href="https://huggingface.co/docs/trl/sft_trainer">TRL SFT Trainer</a></li><li><a href="https://docs.vllm.ai/en/latest/getting_started/quickstart/">vLLM Quickstart</a></li><li><a href="https://docs.vllm.ai/en/latest/serving/openai_compatible_server/">vLLM OpenAI-Compatible Server</a></li></ul></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="difficulty-projects" class="section">
+      <div class="section-header">
+        <h2>Same Projects, Ordered from Easier to Harder</h2>
+        <p>Difficulty ranking calibrated for someone already strong in Python and Django.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Difficulty Rank</th><th>Project</th><th>Why It Falls Here</th><th>Main Technical Challenge</th><th>Suggested First Milestone</th><th>Key Skills</th><th>Core Resources</th><th>Hands-On Tutorials &amp; Guides</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td><strong>Conversational Memory Chatbot</strong></td><td>Closest to standard web-app patterns: request/response flows, sessions, persistence, and basic LLM integration.</td><td>Context window management and memory summarization.</td><td>Build a chat UI with persistent conversation threads and short-term memory.</td><td>Conversation state, sessions, memory, summarization</td><td><ul class="link-list"><li><a href="https://developers.openai.com/api/reference/responses">OpenAI Responses API</a></li><li><a href="https://developers.openai.com/api/docs/guides/conversation-state">Conversation State</a></li><li><a href="https://github.com/pgvector/pgvector">pgvector</a></li><li><a href="https://docs.celeryq.dev/en/stable/django/first-steps-with-django.html">Celery + Django</a></li></ul></td><td><ul class="link-list"><li><a href="https://developers.openai.com/api/reference/responses">Responses API Overview</a></li><li><a href="https://developers.openai.com/api/docs/guides/conversation-state">Conversation State Guide</a></li><li><a href="https://docs.langchain.com/langsmith/observability-quickstart">Tracing Quickstart</a></li></ul></td></tr>
+            <tr><td>2</td><td><strong>AI Knowledge Base (Semantic Wiki)</strong></td><td>Natural extension of CRUD-heavy Django work with embeddings and retrieval layered on top.</td><td>Designing useful chunking, linking, and retrieval behavior.</td><td>Store wiki pages, generate embeddings, and implement semantic search.</td><td>Knowledge organization, embeddings, retrieval, summarization</td><td><ul class="link-list"><li><a href="https://docs.llamaindex.ai/en/stable/">LlamaIndex</a></li><li><a href="https://github.com/pgvector/pgvector">pgvector</a></li><li><a href="https://qdrant.tech/documentation/">Qdrant</a></li><li><a href="https://networkx.org/documentation/stable/">NetworkX</a></li></ul></td><td><ul class="link-list"><li><a href="https://qdrant.tech/documentation/tutorials-basics/search-beginners/">Semantic Search 101</a></li><li><a href="https://www.sbert.net/examples/sentence_transformer/applications/semantic-search/README.html">Sentence Transformers Semantic Search</a></li><li><a href="https://qdrant.tech/documentation/tutorials-search-engineering/hybrid-search-fastembed/">Hybrid Search Tutorial</a></li></ul></td></tr>
+            <tr><td>3</td><td><strong>Production-Grade RAG API</strong></td><td>Still very approachable with your backend skill set, but requires more rigor around ingestion and retrieval quality.</td><td>Building reliable ingestion, chunking, retrieval, and citation paths.</td><td>Create a document upload pipeline and answer questions with cited sources.</td><td>RAG, embeddings, ingestion, retrieval quality, backend architecture</td><td><ul class="link-list"><li><a href="https://docs.llamaindex.ai/en/stable/">LlamaIndex</a></li><li><a href="https://qdrant.tech/documentation/">Qdrant</a></li><li><a href="https://github.com/pgvector/pgvector">pgvector</a></li><li><a href="https://developers.openai.com/api/docs/guides/embeddings">OpenAI Embeddings</a></li><li><a href="https://developers.openai.com/api/docs/guides/evals">OpenAI Evals</a></li></ul></td><td><ul class="link-list"><li><a href="https://qdrant.tech/documentation/quickstart/">Qdrant Quickstart</a></li><li><a href="https://qdrant.tech/documentation/tutorials-basics/search-beginners/">Semantic Search 101</a></li><li><a href="https://qdrant.tech/documentation/tutorials-search-engineering/hybrid-search-fastembed/">Hybrid Search with FastEmbed</a></li><li><a href="https://docs.langchain.com/langsmith/observability-quickstart">RAG Tracing Quickstart</a></li></ul></td></tr>
+            <tr><td>4</td><td><strong>AI Document Analysis Platform</strong></td><td>Similar to RAG, but adds document parsing and structured extraction complexity.</td><td>Handling messy PDFs, tables, and schema-constrained outputs.</td><td>Upload PDFs, extract sections, and return structured JSON summaries.</td><td>Document AI, parsing, structured extraction, RAG</td><td><ul class="link-list"><li><a href="https://pymupdf.readthedocs.io/en/latest/tutorial.html">PyMuPDF</a></li><li><a href="https://docs.unstructured.io/open-source/introduction/overview">Unstructured</a></li><li><a href="https://developers.openai.com/api/docs/guides/structured-outputs">OpenAI Structured Outputs</a></li><li><a href="https://docs.llamaindex.ai/en/stable/">LlamaIndex</a></li></ul></td><td><ul class="link-list"><li><a href="https://pymupdf.readthedocs.io/en/latest/recipes-text.html">PyMuPDF Text Extraction Recipes</a></li><li><a href="https://docs.unstructured.io/examplecode/codesamples/apioss/table-extraction-from-pdf">Unstructured Table Extraction</a></li><li><a href="https://unstructured.io/blog/how-to-process-pdf-in-python">Process PDFs in Python</a></li></ul></td></tr>
+            <tr><td>5</td><td><strong>LLM Evaluation Framework</strong></td><td>Conceptually straightforward for an experienced engineer, but demands careful test design and grading methodology.</td><td>Defining meaningful benchmarks and automating regression detection.</td><td>Build a Django dashboard that runs prompt/model test cases and stores scores.</td><td>Evals, grading, datasets, CI</td><td><ul class="link-list"><li><a href="https://developers.openai.com/api/docs/guides/evals">OpenAI Evals</a></li><li><a href="https://docs.langchain.com/langsmith/evaluation">LangSmith Evaluation</a></li><li><a href="https://docs.langchain.com/langsmith/evaluation-concepts">LangSmith Evaluation Concepts</a></li><li><a href="https://www.promptfoo.dev/">Promptfoo</a></li></ul></td><td><ul class="link-list"><li><a href="https://developers.openai.com/api/docs/guides/evals">OpenAI Evals Guide</a></li><li><a href="https://docs.langchain.com/langsmith/evaluation">LangSmith Evaluation Quickstart</a></li><li><a href="https://docs.langchain.com/langsmith/evaluate-graph">Evaluate a Graph</a></li></ul></td></tr>
+            <tr><td>6</td><td><strong>MCP Server for Private Knowledge + Tools</strong></td><td>Backend-heavy and standards-oriented, which fits your skill set, but introduces a new protocol and tool interface design.</td><td>Defining robust schemas, auth, and tool/resource boundaries.</td><td>Expose one searchable knowledge resource and one internal tool via an MCP server.</td><td>MCP, tool design, schema design, auth, observability, AI platform integration</td><td><ul class="link-list"><li><a href="https://modelcontextprotocol.io/docs/learn/architecture">MCP Architecture</a></li><li><a href="https://modelcontextprotocol.io/docs/sdk">MCP SDKs</a></li><li><a href="https://modelcontextprotocol.io/docs/tools/inspector">MCP Inspector</a></li><li><a href="https://developers.openai.com/api/docs/guides/tools">OpenAI Tools</a></li></ul></td><td><ul class="link-list"><li><a href="https://modelcontextprotocol.io/docs/develop/build-server">Build an MCP Server</a></li><li><a href="https://modelcontextprotocol.io/docs/develop/build-client">Build an MCP Client</a></li><li><a href="https://modelcontextprotocol.io/docs/tutorials/security/authorization">Authorization in MCP</a></li><li><a href="https://developers.openai.com/cookbook/examples/mcp/mcp_tool_guide/">OpenAI MCP Tool Guide</a></li></ul></td></tr>
+            <tr><td>7</td><td><strong>AI Code Review Assistant</strong></td><td>More difficult because it requires repo-aware reasoning, GitHub integration, and tighter precision expectations.</td><td>Reducing noisy reviews and grounding comments in actual code context.</td><td>Build a GitHub webhook consumer that reviews diffs and posts one structured suggestion.</td><td>Code intelligence, GitHub integration, tool use, structured outputs</td><td><ul class="link-list"><li><a href="https://docs.github.com/en/webhooks/webhook-events-and-payloads">GitHub Webhooks</a></li><li><a href="https://docs.github.com/en/rest/pulls/comments">PR Review Comments API</a></li><li><a href="https://developers.openai.com/api/docs/guides/structured-outputs">OpenAI Structured Outputs</a></li><li><a href="https://docs.langchain.com/langsmith/home">LangSmith</a></li></ul></td><td><ul class="link-list"><li><a href="https://docs.github.com/enterprise-cloud@latest/apps/creating-github-apps/writing-code-for-a-github-app/quickstart">GitHub App Quickstart</a></li><li><a href="https://docs.github.com/en/enterprise-server%403.20/apps/creating-github-apps/writing-code-for-a-github-app/building-a-github-app-that-responds-to-webhook-events">Webhook Tutorial</a></li><li><a href="https://developers.openai.com/api/docs/guides/structured-outputs">Structured Outputs Guide</a></li></ul></td></tr>
+            <tr><td>8</td><td><strong>AI Workflow Automation (Agentic)</strong></td><td>Harder because orchestration, retries, approvals, and state transitions multiply failure modes.</td><td>Building controllable multi-step workflows rather than brittle prompt chains.</td><td>Implement a small workflow graph with planner, executor, and approval steps.</td><td>Workflow graphs, orchestration, human-in-the-loop</td><td><ul class="link-list"><li><a href="https://www.langchain.com/langgraph">LangGraph</a></li><li><a href="https://dspy.ai/">DSPy</a></li><li><a href="https://docs.langchain.com/langsmith/home">LangSmith</a></li><li><a href="https://modelcontextprotocol.io/">MCP</a></li></ul></td><td><ul class="link-list"><li><a href="https://docs.langchain.com/oss/python/langgraph/quickstart">LangGraph Quickstart</a></li><li><a href="https://docs.langchain.com/langsmith/observability-quickstart">Observability Quickstart</a></li><li><a href="https://dspy.ai/tutorials/build_ai_program/">Build AI Programs with DSPy</a></li><li><a href="https://dspy.ai/tutorials/deployment/">Deploying DSPy Programs</a></li></ul></td></tr>
+            <tr><td>9</td><td><strong>Multimodal Search Engine</strong></td><td>Harder because cross-modal retrieval introduces a different modeling and UX problem than text-only systems.</td><td>Creating good image-text retrieval quality and ranking behavior.</td><td>Index images and captions, then support text-to-image and image-to-image search.</td><td>Multimodal embeddings, vector search, retrieval UX</td><td><ul class="link-list"><li><a href="https://huggingface.co/docs/transformers/model_doc/clip">CLIP</a></li><li><a href="https://www.sbert.net/README.html">Sentence Transformers</a></li><li><a href="https://qdrant.tech/documentation/">Qdrant</a></li></ul></td><td><ul class="link-list"><li><a href="https://www.sbert.net/examples/sentence_transformer/applications/semantic-search/README.html">Semantic Search Example</a></li><li><a href="https://www.sbert.net/examples/sentence_transformer/README.html">Sentence Transformers Examples</a></li><li><a href="https://huggingface.co/docs/transformers/model_doc/clip">CLIP Usage Guide</a></li><li><a href="https://qdrant.tech/documentation/tutorials-search-engineering/hybrid-search-fastembed/">Hybrid Search Tutorial</a></li></ul></td></tr>
+            <tr><td>10</td><td><strong>Autonomous Research Agent</strong></td><td>One of the hardest because it combines tools, retrieval, planning, citation quality, and evaluation into a single system.</td><td>Managing multi-step reasoning loops without making the system opaque or unreliable.</td><td>Build an agent that searches a constrained source set and produces cited reports.</td><td>Agents, tool calling, workflow graphs, evals, tracing</td><td><ul class="link-list"><li><a href="https://www.langchain.com/langgraph">LangGraph</a></li><li><a href="https://developers.openai.com/api/docs/guides/function-calling">OpenAI Function Calling</a></li><li><a href="https://developers.openai.com/api/docs/guides/evals">OpenAI Evals</a></li><li><a href="https://docs.langchain.com/langsmith/home">LangSmith</a></li></ul></td><td><ul class="link-list"><li><a href="https://docs.langchain.com/oss/python/langgraph/quickstart">LangGraph Quickstart</a></li><li><a href="https://docs.langchain.com/langsmith/evaluate-graph">Evaluate a Graph</a></li><li><a href="https://docs.langchain.com/langsmith/observability-quickstart">Tracing Quickstart</a></li><li><a href="https://dspy.ai/tutorials/build_ai_program/">DSPy Tutorials</a></li></ul></td></tr>
+            <tr><td>11</td><td><strong>Fine-Tuning Pipeline</strong></td><td>Hardest for most web engineers because it adds dataset work, training infrastructure, evaluation, and serving concerns that are less native to Django/backend practice.</td><td>Producing a good dataset and closing the loop between training and measurable improvement.</td><td>Fine-tune a small open-weight model on a narrow task and serve it behind an API.</td><td>Open-weight training, LoRA/QLoRA, inference serving</td><td><ul class="link-list"><li><a href="https://huggingface.co/docs/transformers/en/index">Transformers</a></li><li><a href="https://huggingface.co/docs/peft/index">PEFT</a></li><li><a href="https://huggingface.co/docs/trl/en/index">TRL</a></li><li><a href="https://docs.vllm.ai/en/latest/getting_started/quickstart/">vLLM</a></li></ul></td><td><ul class="link-list"><li><a href="https://huggingface.co/docs/peft/quicktour">PEFT Quicktour</a></li><li><a href="https://huggingface.co/docs/trl/en/quickstart">TRL Quickstart</a></li><li><a href="https://huggingface.co/docs/trl/sft_trainer">TRL SFT Trainer</a></li><li><a href="https://docs.vllm.ai/en/latest/getting_started/quickstart/">vLLM Quickstart</a></li><li><a href="https://docs.vllm.ai/en/latest/serving/openai_compatible_server/">vLLM OpenAI-Compatible Server</a></li></ul></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <p class="foot">This page is designed as a working planning artifact: use the roadmap table to sequence learning, the portfolio table to pick standout builds, and the difficulty table to stage projects realistically against your current backend-heavy skill set.</p>
+  </div>
+</body>
+</html>
