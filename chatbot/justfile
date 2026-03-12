@@ -10,5 +10,10 @@ makemigrations:
 rebuild:
   docker compose build web
 
-run:
-  docker compose up
+run *args:
+  docker compose up {{args}}
+
+reset:
+  docker compose down -v --remove-orphans
+  docker compose build web
+  just migrate
