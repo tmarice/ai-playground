@@ -1,0 +1,14 @@
+manage *args:
+  docker compose run --rm web uv run --active manage.py {{args}}
+
+migrate:
+  just manage migrate
+
+makemigrations:
+  just manage makemigrations
+
+rebuild:
+  docker compose build web
+
+run:
+  docker compose up
