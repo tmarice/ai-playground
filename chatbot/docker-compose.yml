@@ -37,6 +37,19 @@ services:
       redis:
         condition: service_healthy
 
+  procrastinate:
+    build: .
+    command: ["python", "manage.py", "procrastinate", "worker", "--concurrency", "4"]
+    volumes:
+      - .:/app
+    environment:
+      DJANGO_SETTINGS_MODULE: chatbot.settings.procrastinate
+    healthcheck:
+      test: ["CMD", "python", "manage.py", "procrastinate", "healthcheck"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
   nginx:
     image: nginx:1.27-alpine
     ports:

@@ -5,9 +5,15 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
+    "anthropic[aiohttp]>=0.84.0",
     "django>=6.0.3",
     "django-bolt>=0.7.0",
+    "django-htmx>=1.27.0",
     "django-redis>=5.4.0",
     "gunicorn>=25.1.0",
+    "openai[aiohttp]>=2.26.0",
+    "procrastinate[django]>=3.7.2",
     "psycopg[pool]>=3.3.3",
+    "redis>=7.3.0",
+    "whitenoise>=6.11.0",
 ]

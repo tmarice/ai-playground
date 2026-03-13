@@ -14,6 +14,12 @@ DATABASES = {
         "PASSWORD": "chatbot",
         "HOST": "db",
         "PORT": "5432",
-        "OPTIONS": {"pooling": True},
+        "CONN_MAX_AGE": 0,
+        "OPTIONS": {
+            "pool": {
+                "min_size": 2,
+                "max_size": 20,
+            },
+        },
     }
 }

@@ -8,14 +8,15 @@ DATABASES = {
         "PASSWORD": "chatbot",
         "HOST": "db",
         "PORT": "5432",
-        "OPTIONS": {},
+        "CONN_MAX_AGE": 0,
+        "OPTIONS": {
+            "pool": {
+                "min_size": 2,
+                "max_size": 20,
+            },
+        },
     }
 }
-
-
-CSRF_TRUSTED_ORIGINS = [
-    "http://127.0.0.1:8000",
-]
 
 INSTALLED_APPS += [
     "procrastinate.contrib.django",

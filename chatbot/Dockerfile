@@ -36,7 +36,7 @@ COPY . /app/
 
 # Create a non-root user
 RUN useradd --create-home --shell /bin/bash appuser \
-    && chown -R appuser:appuser /app
+    && chown -R appuser:appuser /app /opt/venv
 USER appuser
 
 EXPOSE 8000 8001

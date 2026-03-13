@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Chatbot{% endblock %}
+
+{% block content %}
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar-header">Chatbot</div>
+      <div class="sidebar-section">Recent</div>
+      <ul class="chat-list">
+        <li class="chat-item">Project kickoff notes</li>
+        <li class="chat-item">API debugging session</li>
+        <li class="chat-item">Marketing copy drafts</li>
+        <li class="chat-item">Support escalation</li>
+        <li class="chat-item">UI polish checklist</li>
+      </ul>
+    </aside>
+
+    <main class="main">
+      <section class="messages" id="chat-window">
+        <div class="message">Welcome back! How can I help today?</div>
+      </section>
+
+      <section class="composer">
+        <form
+          class="composer-inner"
+          method="post"
+          hx-post="{% url 'chat:new_chat' %}"
+          hx-target="#chat-window"
+          hx-swap="beforeend"
+        >
+          {% csrf_token %}
+          <div class="composer-left">
+            <div class="provider-list">
+              {% for provider in available_providers %}
+                <label class="provider-item">
+                  <input type="checkbox" name="providers" value="{{ provider }}">
+                  <span>{{ provider }}</span>
+                </label>
+              {% endfor %}
+            </div>
+            <textarea name="message" placeholder="Message Chatbot..." required></textarea>
+          </div>
+          <button type="submit">Send</button>
+        </form>
+        <div class="footer-hint">Shift + Enter to add a new line</div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    document.addEventListener("click", (event) => {
+      const tab = event.target.closest(".provider-tab");
+      if (!tab) {
+        return;
+      }
+
+      const container = tab.closest(".message.assistant");
+      if (!container) {
+        return;
+      }
+
+      const provider = tab.dataset.provider;
+      container.querySelectorAll(".provider-tab").forEach((item) => {
+        const isActive = item === tab;
+        item.classList.toggle("active", isActive);
+        item.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+
+      container.querySelectorAll(".provider-panel").forEach((panel) => {
+        panel.classList.toggle("active", panel.dataset.provider === provider);
+      });
+    });
+  </script>
+{% endblock %}

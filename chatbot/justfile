@@ -8,7 +8,7 @@ makemigrations:
   just manage makemigrations
 
 rebuild:
-  docker compose build web
+  docker compose build web bolt
 
 run *args:
   docker compose up {{args}}
