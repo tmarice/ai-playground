@@ -17,3 +17,9 @@ dependencies = [
     "redis>=7.3.0",
     "whitenoise>=6.11.0",
 ]
+
+[dependency-groups]
+dev = [
+    "django-extensions>=4.1",
+    "ipython>=9.11.0",
+]

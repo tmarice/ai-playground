@@ -17,3 +17,6 @@ reset:
   docker compose down -v --remove-orphans
   docker compose build web
   just migrate
+
+shell:
+  just manage shell_plus --ipython

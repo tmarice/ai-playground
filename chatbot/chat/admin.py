@@ -11,6 +11,5 @@ class ProviderAdmin(admin.ModelAdmin):
 
 @admin.register(Chat)
 class ChatAdmin(admin.ModelAdmin):
-    list_display = ("id", "created_at", "user")
+    list_display = ("id", "created_at", "user", "provider")
     search_fields = ("id",)
-    filter_horizontal = ("providers",)

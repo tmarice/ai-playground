@@ -1,9 +1,10 @@
 from django.contrib.auth import views as auth_views
+from django.urls import reverse_lazy
 
 
 class LoginView(auth_views.LoginView):
     template_name = "registration/login.html"
-    next_page = "/chat"
+    next_page = reverse_lazy("chat:new_chat")
 
 
 class LogoutView(auth_views.LogoutView):

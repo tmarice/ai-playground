@@ -22,18 +22,23 @@ class Chat(models.Model):
     provider = models.ForeignKey(Provider, on_delete=models.CASCADE)
     uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
     title = models.CharField(max_length=255, blank=True)
+    # TODO Add this to handle multi-tab access to same chat
+    # processing = models.BooleanField(default=False)
 
     def __str__(self):
         return f"Chat {self.timestamp}"
 
     def dump_messages_list(self):
-        messages = self.message_set.order_by("created_at").values("role", "content")
+        messages = self.message_set.order_by("created_at").values_list(
+            "role", "content", "status", named=True
+        )
         messages_list = [
             {
-                "role": m["role"],
-                "content": m["content"],
+                "role": m.role,
+                "content": m.content,
             }
             for m in messages
+            if m.status == Message.Status.DONE
         ]
         return messages_list
 
@@ -52,10 +57,11 @@ class Message(models.Model):
     chat = models.ForeignKey(Chat, on_delete=models.CASCADE)
     role = models.CharField(choices=Role, max_length=255)
     content = models.TextField()
-    last_consumed_seq_id = models.PositiveIntegerField(default=0)
+    last_seq_id = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     status = models.CharField(choices=Status, max_length=255, default=Status.PENDING)
+    uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
 
     def __str__(self):
         return f"Message from {self.sender} at {self.timestamp}"

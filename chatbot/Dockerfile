@@ -21,8 +21,9 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # Install uv and create a virtualenv
+ENV UV_INSTALL_DIR=/usr/local/bin
 RUN curl -Ls https://astral.sh/uv/install.sh | sh \
-    && /root/.local/bin/uv venv /opt/venv
+    && uv venv /opt/venv
 
 ENV VIRTUAL_ENV=/opt/venv \
     PATH="/opt/venv/bin:/root/.local/bin:$PATH"
