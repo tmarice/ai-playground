@@ -1,5 +1,5 @@
 manage *args:
-  docker compose run --rm web uv run --active manage.py {{args}}
+  docker compose run --rm web uv run --no-sync --active manage.py {{args}}
 
 migrate:
   just manage migrate
@@ -8,7 +8,7 @@ makemigrations:
   just manage makemigrations
 
 rebuild:
-  docker compose build web bolt
+  docker compose build web bolt procrastinate
 
 run *args:
   docker compose up {{args}}

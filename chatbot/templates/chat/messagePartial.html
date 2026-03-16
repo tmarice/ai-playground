@@ -1,0 +1,15 @@
+<div class="message user">
+  {{ user_message.content|linebreaksbr }}
+</div>
+<div
+  class="message assistant"
+  data-message-uuid="{{ assistant_message.uuid }}"
+>
+  <div
+    class="llm-response"
+    data-message-uuid="{{ assistant_message.uuid }}"
+    data-chat-uuid="{{ chat.uuid }}"
+  >
+    <span class="llm-placeholder">Waiting for {{ chat.provider.provider_type }}...</span>
+  </div>
+</div>

@@ -1,10 +1,13 @@
 services:
   web:
     build: .
-    command: ["gunicorn", "chatbot.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3", "--timeout", "60"]
+    command: ["uv", "run", "--no-sync", "--active", "python", "manage.py", "runserver", "0:8000"]
     volumes:
       - .:/app
+    stdin_open: true
+    tty: true
     environment:
+      PYTHONDBREAKPOINT: "ipdb.set_trace()"
       DJANGO_SETTINGS_MODULE: chatbot.settings.web
       SECRET_KEY: "change-me"
       DEBUG: "1"
@@ -20,7 +23,7 @@ services:
 
   bolt:
     build: .
-    command: ["python", "manage.py", "runbolt", "--host", "0.0.0.0", "--port", "8001"]
+    command: ["uv", "run", "--no-sync", "--active", "python", "manage.py", "runbolt", "--host", "0.0.0.0", "--port", "8001"]
     volumes:
       - .:/app
     environment:
@@ -39,13 +42,13 @@ services:
 
   procrastinate:
     build: .
-    command: ["python", "manage.py", "procrastinate", "worker", "--concurrency", "4"]
+    command: ["uv", "run", "--no-sync", "--active", "python", "manage.py", "procrastinate", "worker", "--concurrency", "4"]
     volumes:
       - .:/app
     environment:
       DJANGO_SETTINGS_MODULE: chatbot.settings.procrastinate
     healthcheck:
-      test: ["CMD", "python", "manage.py", "procrastinate", "healthcheck"]
+      test: ["CMD", "uv", "run", "--no-sync", "--active", "python", "manage.py", "procrastinate", "healthcheck"]
       interval: 30s
       timeout: 10s
       retries: 3

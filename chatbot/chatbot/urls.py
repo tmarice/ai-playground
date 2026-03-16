@@ -27,6 +27,6 @@ urlpatterns = [
     path("", root_views.root_landing, name="root"),
     path("admin/", admin.site.urls),
     path("login/", accounts_views.LoginView.as_view(), name="login"),
-    path("accounts/", include("accounts.urls")),
-    path("chat/", include("chat.urls")),
+    path("accounts/", include("accounts.urls", namespace="accounts")),
+    path("chat/", include("chat.urls", namespace="chat")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

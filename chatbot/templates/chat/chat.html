@@ -17,24 +17,58 @@
     </aside>
 
     <main class="main">
-      <section class="messages" id="chat-window">
-        <div class="message">Welcome back! How can I help today?</div>
+      <section
+        class="messages"
+        id="chat-window"
+        {% if chat_uuid %}
+          data-chat-uuid="{{ chat_uuid }}"
+          data-last-seq-id="{{ last_seq_id|default:'' }}"
+        {% endif %}
+      >
+        {% if messages %}
+          {% for message in messages %}
+            {% if message.role == "user" %}
+              <div class="message user">
+                {{ message.content|linebreaksbr }}
+              </div>
+            {% else %}
+              <div
+                class="message assistant"
+                data-message-uuid="{{ message.uuid }}"
+              >
+                <div
+                  class="llm-response"
+                  data-message-uuid="{{ message.uuid }}"
+                  data-chat-uuid="{{ chat_uuid }}"
+                >
+                  {% if message.status == "pending" %}
+                    <span class="llm-placeholder">Waiting for {{ chat.provider.provider_type }}...</span>
+                  {% else %}
+                    {{ message.content|linebreaksbr }}
+                  {% endif %}
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <div class="message">Welcome back! How can I help today?</div>
+        {% endif %}
       </section>
 
       <section class="composer">
         <form
           class="composer-inner"
           method="post"
-          hx-post="{% url 'chat:new_chat' %}"
+          hx-post="{% if chat_uuid %}{% url 'chat:chat_detail' chat_uuid=chat_uuid %}{% else %}{% url 'chat:new_chat' %}{% endif %}"
           hx-target="#chat-window"
-          hx-swap="beforeend"
+          hx-swap="{% if chat_uuid %}beforeend{% else %}outerHTML{% endif %}"
         >
           {% csrf_token %}
           <div class="composer-left">
             <div class="provider-list">
               {% for provider in available_providers %}
                 <label class="provider-item">
-                  <input type="checkbox" name="providers" value="{{ provider }}">
+                  <input type="radio" name="provider" value="{{ provider }}" {% if forloop.first %}checked{% endif %}>
                   <span>{{ provider }}</span>
                 </label>
               {% endfor %}
@@ -49,27 +83,81 @@
   </div>
 
   <script>
-    document.addEventListener("click", (event) => {
-      const tab = event.target.closest(".provider-tab");
-      if (!tab) {
+    let activeEventSource = null;
+
+    const connectToChatStream = (container) => {
+      const chatUuid = container?.dataset?.chatUuid;
+      if (!chatUuid) {
         return;
       }
 
-      const container = tab.closest(".message.assistant");
-      if (!container) {
-        return;
+      if (activeEventSource) {
+        activeEventSource.close();
+        activeEventSource = null;
       }
 
-      const provider = tab.dataset.provider;
-      container.querySelectorAll(".provider-tab").forEach((item) => {
-        const isActive = item === tab;
-        item.classList.toggle("active", isActive);
-        item.setAttribute("aria-selected", isActive ? "true" : "false");
-      });
+      const lastSeqId = container.dataset.lastSeqId || "";
+      const url = lastSeqId
+        ? `/api/chat/${chatUuid}?last_seq_id=${encodeURIComponent(lastSeqId)}`
+        : `/api/chat/${chatUuid}`;
 
-      container.querySelectorAll(".provider-panel").forEach((panel) => {
-        panel.classList.toggle("active", panel.dataset.provider === provider);
-      });
+      activeEventSource = new EventSource(url);
+
+      activeEventSource.onmessage = (event) => {
+        if (!event.data) {
+          return;
+        }
+
+        let payload = null;
+        try {
+          payload = JSON.parse(event.data);
+        } catch (error) {
+          payload = { content: event.data };
+        }
+
+        const messageUuid = payload.message_uuid;
+        const content = payload.content ?? "";
+        const seqId = payload.seq_id;
+
+        let target = null;
+        if (messageUuid) {
+          target = container.querySelector(`.llm-response[data-message-uuid="${messageUuid}"]`);
+        }
+        if (!target) {
+          const responses = container.querySelectorAll(".llm-response");
+          target = responses[responses.length - 1];
+        }
+
+        if (!target) {
+          return;
+        }
+
+        const placeholder = target.querySelector(".llm-placeholder");
+        if (placeholder) {
+          placeholder.remove();
+        }
+
+        target.insertAdjacentText("beforeend", content);
+
+        if (seqId) {
+          container.dataset.lastSeqId = seqId;
+        }
+      };
+
+      activeEventSource.onerror = () => {
+        activeEventSource?.close();
+        activeEventSource = null;
+      };
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+      connectToChatStream(document.getElementById("chat-window"));
+    });
+
+    document.body.addEventListener("htmx:afterSwap", (event) => {
+      if (event.target?.id === "chat-window") {
+        connectToChatStream(event.target);
+      }
     });
   </script>
 {% endblock %}

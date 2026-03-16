@@ -1,36 +1,22 @@
-{% load static %}
-<div class="message user">
-  {{ message|linebreaksbr }}
-</div>
-<div class="message assistant" data-chat-id="{{ chat.id }}">
-  <div class="provider-tabs" role="tablist">
-    {% for provider in providers %}
-      <button
-        class="provider-tab{% if forloop.first %} active{% endif %}"
-        type="button"
-        role="tab"
-        aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
-        data-provider="{{ provider.provider_type|slugify }}"
-      >
-        {{ provider.provider_type }}
-      </button>
-    {% endfor %}
+<section
+  class="messages"
+  id="chat-window"
+  data-chat-uuid="{{ chat.uuid }}"
+  data-last-seq-id=""
+>
+  <div class="message user">
+    {{ user_message.content|linebreaksbr }}
   </div>
-  <div class="provider-panels">
-    {% for provider in providers %}
-      <div
-        class="provider-panel{% if forloop.first %} active{% endif %}"
-        role="tabpanel"
-        data-provider="{{ provider.provider_type|slugify }}"
-      >
-        <div
-          class="llm-response"
-          data-provider="{{ provider.provider_type }}"
-          data-chat-id="{{ chat.id }}"
-        >
-          <span class="llm-placeholder">Waiting for {{ provider.provider_type }}...</span>
-        </div>
-      </div>
-    {% endfor %}
+  <div
+    class="message assistant"
+    data-message-uuid="{{ assistant_message.uuid }}"
+  >
+    <div
+      class="llm-response"
+      data-message-uuid="{{ assistant_message.uuid }}"
+      data-chat-uuid="{{ chat.uuid }}"
+    >
+      <span class="llm-placeholder">Waiting for {{ provider.provider_type }}...</span>
+    </div>
   </div>
-</div>
+</section>
