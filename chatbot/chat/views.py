@@ -14,11 +14,11 @@ class ChatView(View):
     def get(self, request, chat_uuid):
         chat = get_object_or_404(Chat, uuid=chat_uuid, user_id=request.user.id)
         messages = list(chat.message_set.order_by("created_at"))
-        last_seq_id = ""
-        for message in reversed(messages):
-            if message.last_seq_id:
-                last_seq_id = message.last_seq_id
-                break
+        last_seq_id = (
+            messages[-1].last_seq_id
+            if messages and messages[-1].status == Message.Status.PROCESSING
+            else None
+        )
 
         context = {
             "chat": chat,
@@ -48,7 +48,7 @@ class ChatView(View):
                 content="",
                 status=Message.Status.PENDING,
             )
-            build_assistant_message.defer(assistant_message.id)
+            build_assistant_message.defer(message_id=assistant_message.id)
 
         return render(
             request,
@@ -95,7 +95,7 @@ class NewChatView(View):
                 content="",
                 status=Message.Status.PENDING,
             )
-            build_assistant_message.defer(assistant_message.id)
+            build_assistant_message.defer(message_id=assistant_message.id)
 
         response = render(
             request,
@@ -107,5 +107,7 @@ class NewChatView(View):
                 "provider": provider,
             },
         )
-        response["HX-Push-Url"] = reverse("chat:chat_detail", kwargs={"chat_uuid": chat.uuid})
+        response["HX-Push-Url"] = reverse(
+            "chat:chat_detail", kwargs={"chat_uuid": chat.uuid}
+        )
         return response

@@ -26,7 +26,7 @@ class Chat(models.Model):
     # processing = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"Chat {self.timestamp}"
+        return f"Chat {self.created_at} - {self.title}"
 
     def dump_messages_list(self):
         messages = self.message_set.order_by("created_at").values_list(
@@ -64,4 +64,4 @@ class Message(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
 
     def __str__(self):
-        return f"Message from {self.sender} at {self.timestamp}"
+        return f"Message - {self.role} - {self.created_at}"

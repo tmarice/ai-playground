@@ -97,9 +97,17 @@
       }
 
       const lastSeqId = container.dataset.lastSeqId || "";
+      const responses = container.querySelectorAll(".llm-response[data-message-uuid]");
+      const lastResponse = responses[responses.length - 1];
+      const messageUuid = lastResponse?.dataset?.messageUuid;
+
+      if (!messageUuid) {
+        return;
+      }
+
       const url = lastSeqId
-        ? `/api/chat/${chatUuid}?last_seq_id=${encodeURIComponent(lastSeqId)}`
-        : `/api/chat/${chatUuid}`;
+        ? `/api/v1/chat/${chatUuid}/${messageUuid}?last_seq_id=${encodeURIComponent(lastSeqId)}`
+        : `/api/v1/chat/${chatUuid}/${messageUuid}`;
 
       activeEventSource = new EventSource(url);
 

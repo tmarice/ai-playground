@@ -4,8 +4,6 @@ INSTALLED_APPS += [
     "django_bolt",
 ]
 
-BOLT_APPLICATION = "chat.api.app"
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",

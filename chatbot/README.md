@@ -18,6 +18,3 @@
     * When user message is sent, trigger a job
     * Job sends request to provider API, receives response chunks, publishes them to appropriate Redis Stream, every X
       chunks flushes the content to database saving partial message + last seq ID
-
-* Qs:
-    * How to handle Redis stream deletion? I assume I need to remove the unused streams to avoid wasting resources

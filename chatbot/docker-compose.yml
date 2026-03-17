@@ -4,6 +4,7 @@ services:
     command: ["uv", "run", "--no-sync", "--active", "python", "manage.py", "runserver", "0:8000"]
     volumes:
       - .:/app
+      - ipython_history:/home/appuser/.ipython
     stdin_open: true
     tty: true
     environment:
@@ -23,7 +24,7 @@ services:
 
   bolt:
     build: .
-    command: ["uv", "run", "--no-sync", "--active", "python", "manage.py", "runbolt", "--host", "0.0.0.0", "--port", "8001"]
+    command: ["uv", "run", "--no-sync", "--active", "python", "manage.py", "runbolt", "--dev", "--host", "0.0.0.0", "--port", "8001"]
     volumes:
       - .:/app
     environment:
@@ -91,3 +92,4 @@ services:
 volumes:
   pgdata:
   redisdata:
+  ipython_history:
