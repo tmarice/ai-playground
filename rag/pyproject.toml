@@ -1,0 +1,10 @@
+[project]
+name = "rag"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "django>=6.0.3",
+    "django-bolt>=0.7.0",
+]
