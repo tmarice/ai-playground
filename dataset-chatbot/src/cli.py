@@ -226,7 +226,7 @@ class ChatTab(Container):
 
         history.mount(ChatMessage(f"> {question}", is_question=True))
 
-        response = self.processor.process(question, self.datasources)
+        response = self.processor.process(question)
         history.mount(ChatMessage(response, is_question=False))
 
         history.scroll_end(animate=False)
@@ -272,7 +272,7 @@ class DatasetChatbotApp(App):
     def __init__(self, datasources: list[DataSource]) -> None:
         super().__init__()
         self.datasources = datasources
-        self.processor = DuckDBProcessor()
+        self.processor = DuckDBProcessor(self.datasources)
 
     def compose(self) -> ComposeResult:
         yield Header()

@@ -7,9 +7,6 @@
 }:
 
 {
-  packages = with pkgs; [
-    just
-  ];
   languages = {
     python = {
       enable = true;
@@ -17,4 +14,6 @@
       uv.enable = true;
     };
   };
+
+  env.OPENAI_API_KEY = config.secretspec.secrets.OPENAI_API_KEY;
 }

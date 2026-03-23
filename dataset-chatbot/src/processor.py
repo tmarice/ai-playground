@@ -60,7 +60,7 @@ class DuckDBProcessor:
 
     def process(self, question: str) -> str:
         # 1. Determine if we even need to generate a SQL query
-        datasource_metadata = "\n\n".join(ds.metadata for ds in self._datasources)
+        datasource_metadata = "\n\n".join(str(ds.metadata) for ds in self._datasources)
         decision_prompt = self.DECISION_PROMPT.format(
             datasource_metadata=datasource_metadata
         )
@@ -86,7 +86,7 @@ class DuckDBProcessor:
                 messages
             )
 
-            return response
+            return response.answer
 
         # 2. Cannot answer from metadata only, need to generate a SQL query
         else:
